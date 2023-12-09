@@ -3,7 +3,7 @@ import pandas as pd
 import os
  
 # get current directory
-path = os.path.join(os.getcwd(), 'all_data.csv')
+path = os.path.join(os.getcwd(), 'data/all_data.csv')
 all_data = pd.read_csv(path)
 
 # convert month name function
