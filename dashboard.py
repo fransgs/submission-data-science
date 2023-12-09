@@ -185,19 +185,19 @@ st.header(":blue[AIR QUALITY MONITORING]", divider='blue')
     
 col_1, col_2, col_3 = st.columns(3)
 with col_1:
-    stations = src.get_station(data)
+    stations = get_station(data)
     station = st.selectbox(label="Station", label_visibility='collapsed', options=stations)
     st.write("###")
     
 with col_2:
-    years = src.get_year(data)
+    years = get_year(data)
     year = st.selectbox(label="Pollutans", label_visibility='collapsed', options=years)
 
 with col_3:
-    months = src.get_month(data, year)
+    months = get_month(data, year)
     month = st.selectbox(label="Pollutants", label_visibility='collapsed', options=months)
 
-temp, pres, rh, rain, wind = src.monthly_elements(data, station, year, month)
+temp, pres, rh, rain, wind = monthly_elements(data, station, year, month)
 bar_1, bar_2, bar_3, bar_4, bar_5 = st.columns(5)
 with bar_1:
     st.image("images/temperature.png", width=100)
@@ -222,7 +222,7 @@ with tab1:
     # Rata-rata total semua polutan dalam perhari
     with column1:
         with st.container():
-            monthly_pollutants = src.monthly_pollutants(data, station, year, month)
+            monthly_pollutants = monthly_pollutants(data, station, year, month)
             fig = px.line(monthly_pollutants,
                         title="Average Pollutants Daily",
                         labels={"day": "Days", "value": "µg/m³", "variable": "Pollutants"},
@@ -233,7 +233,7 @@ with tab1:
     # Rata-rata tiap polutan dalam bulan
     with column2:
         with st.container():
-            pollutants = src.pollutan_by_month(data, station, year, month)
+            pollutants = pollutan_by_month(data, station, year, month)
             fig = px.bar(pollutants,
                         orientation='h',
                         title="Average Pollutants Monthly",
@@ -246,7 +246,7 @@ with tab1:
 with tab2:
     col1, col2 = st.columns(2)
     with col1:
-        pm25 = src.average_pm25(data, station, year, month)
+        pm25 = average_pm25(data, station, year, month)
         fig = px.line(pm25, 
                     title="PM2.5",
                     labels={"day": "Days", "value": "µg/m³"})
@@ -254,7 +254,7 @@ with tab2:
         st.plotly_chart(fig, use_container_width=True)
     
     with col2:
-        pm10 = src.average_pm10(data, station, year, month)
+        pm10 = average_pm10(data, station, year, month)
         fig = px.line(pm10,
                      title="PM10",
                      labels={"day": "Days", "value": "µg/m³"})
@@ -263,7 +263,7 @@ with tab2:
         
     col3, col4 = st.columns(2)
     with col3:
-        SO2 = src.average_SO2(data, station, year, month)
+        SO2 = average_SO2(data, station, year, month)
         fig = px.line(SO2,
                      title="SO₂",
                      labels={"day": "Days", "value": "µg/m³"})
@@ -271,7 +271,7 @@ with tab2:
         st.plotly_chart(fig, use_container_width=True)
 
     with col4:
-        NO2 = src.average_NO2(data, station, year, month)
+        NO2 = average_NO2(data, station, year, month)
         fig = px.line(NO2,
                      title="NO₂",
                      labels={"day": "Days", "value": "µg/m³"})
@@ -280,7 +280,7 @@ with tab2:
 
     col5, col6 = st.columns(2)
     with col5:
-        CO = src.average_CO(data, station, year, month)
+        CO = average_CO(data, station, year, month)
         fig = px.line(CO,
                      title="CO",
                      labels={"day": "Days", "value": "µg/m³"})
@@ -288,7 +288,7 @@ with tab2:
         st.plotly_chart(fig, use_container_width=True)
         
     with col6:
-        O3 = src.average_O3(data, station, year, month)
+        O3 = average_O3(data, station, year, month)
         fig = px.line(O3,
                      title="O₃",
                      labels={"day": "Days", "value": "µg/m³"})
