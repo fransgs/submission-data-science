@@ -3,9 +3,8 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 
-# get current directory
-path = "data/all_data.csv"
-all_data = pd.read_csv(path)
+# get file from current directory
+all_data = pd.read_csv("data/all_data.csv")
 
 # convert month name function
 month_names = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
